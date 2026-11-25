@@ -189,7 +189,7 @@ var c=document.getElementById('car');c.onmouseenter=function(){h=true};c.onmouse
 var lb=document.getElementById('lb'),li=document.getElementById('lbi'),op=false;
 function openLb(im){li.src=im.src;li.alt=im.alt||'';lb.className='on';op=true;document.body.style.overflow='hidden'}
 function closeLb(){lb.className='';op=false;li.removeAttribute('src');document.body.style.overflow='';h=false}
-for(k=0;k<n;k++){t.children[k].addEventListener('click',function(){openLb(this)})}
+var ims=document.getElementsByTagName('img');for(k=0;k<ims.length;k++){if(ims[k]!==li){ims[k].style.cursor='zoom-in';ims[k].addEventListener('click',function(){openLb(this)})}}
 document.getElementById('lbx').onclick=closeLb;lb.addEventListener('click',function(e){if(e.target!==li)closeLb()});
 document.addEventListener('keydown',function(e){if(e.key==='Escape'&&op)closeLb()});
 setInterval(function(){if(!h&&!op)go(i+1)},1500)}catch(e){}})();
