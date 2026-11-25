@@ -55,6 +55,11 @@ footer{padding:36px 0 48px;color:var(--mute);font-size:13px;text-align:center}
 @media(max-width:760px){.rec{grid-template-columns:1fr}}
 .ico{width:46px;height:46px;border-radius:12px;background:var(--bg);border:1px solid var(--line);display:flex;align-items:center;justify-content:center;font-size:24px;margin-bottom:10px}
 .hero .hsub{font-size:clamp(19px,3.2vw,28px);font-weight:700;margin:0 0 16px;opacity:.96}
+#trk img{cursor:zoom-in}
+#lb{position:fixed;inset:0;z-index:9999;background:rgba(0,0,0,.9);display:none;align-items:center;justify-content:center;padding:16px}
+#lb.on{display:flex}
+#lb img{max-width:100%;max-height:100%;object-fit:contain;border-radius:8px;box-shadow:0 10px 40px rgba(0,0,0,.6)}
+#lbx{position:absolute;top:14px;right:14px;width:44px;height:44px;border-radius:50%;border:0;background:rgba(255,255,255,.92);color:#111;font-size:26px;line-height:1;cursor:pointer;display:flex;align-items:center;justify-content:center}
 </style></head><body>
 <header class="hero"><div class="wrap grid">
 <div><span class="tag">案例分享｜文化部文化資產局委託</span>
@@ -172,6 +177,7 @@ footer{padding:36px 0 48px;color:var(--mute);font-size:13px;text-align:center}
 
 </main>
 <footer>大玩創意有限公司 Big Fun Idea Co., Ltd｜slime@bigfunidea.com.tw｜03-3262912</footer>
+<div id="lb" role="dialog" aria-modal="true" aria-label="放大瀏覽圖片"><button id="lbx" type="button" aria-label="關閉">×</button><img id="lbi" alt=""></div>
 <script>
 (function(){try{var t=document.getElementById('trk'),n=t.children.length,d=document.getElementById('cd'),i=0,h=false,k;
 for(k=0;k<n;k++){d.appendChild(document.createElement('i'))}
@@ -179,6 +185,12 @@ function mark(){var j=Math.round(t.scrollLeft/t.clientWidth);i=j;for(var x=0;x<n
 function go(j){i=(j+n)%n;t.scrollTo({left:i*t.clientWidth,behavior:'smooth'})}
 t.addEventListener('scroll',mark);mark();
 document.getElementById('cp').onclick=function(){go(i-1)};document.getElementById('cn').onclick=function(){go(i+1)};
-var c=document.getElementById('car');c.onmouseenter=function(){h=true};c.onmouseleave=function(){h=false};c.addEventListener('touchstart',function(){h=true},{passive:true});
-setInterval(function(){if(!h)go(i+1)},1500)}catch(e){}})();
+var c=document.getElementById('car');c.onmouseenter=function(){h=true};c.onmouseleave=function(){h=false};var tt;c.addEventListener('touchstart',function(){h=true;clearTimeout(tt)},{passive:true});c.addEventListener('touchend',function(){clearTimeout(tt);tt=setTimeout(function(){h=false},2500)},{passive:true});
+var lb=document.getElementById('lb'),li=document.getElementById('lbi'),op=false;
+function openLb(im){li.src=im.src;li.alt=im.alt||'';lb.className='on';op=true;document.body.style.overflow='hidden'}
+function closeLb(){lb.className='';op=false;li.removeAttribute('src');document.body.style.overflow='';h=false}
+for(k=0;k<n;k++){t.children[k].addEventListener('click',function(){openLb(this)})}
+document.getElementById('lbx').onclick=closeLb;lb.addEventListener('click',function(e){if(e.target!==li)closeLb()});
+document.addEventListener('keydown',function(e){if(e.key==='Escape'&&op)closeLb()});
+setInterval(function(){if(!h&&!op)go(i+1)},1500)}catch(e){}})();
 </script></body></html>
