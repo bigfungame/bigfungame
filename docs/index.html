@@ -56,10 +56,11 @@ footer{padding:36px 0 48px;color:var(--mute);font-size:13px;text-align:center}
 .ico{width:46px;height:46px;border-radius:12px;background:var(--bg);border:1px solid var(--line);display:flex;align-items:center;justify-content:center;font-size:24px;margin-bottom:10px}
 .hero .hsub{font-size:clamp(19px,3.2vw,28px);font-weight:700;margin:0 0 16px;opacity:.96}
 #trk img{cursor:zoom-in}
-#lb{position:fixed;inset:0;z-index:9999;background:rgba(0,0,0,.9);display:none;align-items:center;justify-content:center;padding:16px}
+#lb{position:fixed;inset:0;z-index:9999;background:rgba(0,0,0,.92);display:none;flex-direction:column;align-items:center;justify-content:center;gap:16px;padding:16px}
 #lb.on{display:flex}
-#lb img{max-width:100%;max-height:100%;object-fit:contain;border-radius:8px;box-shadow:0 10px 40px rgba(0,0,0,.6)}
-#lbx{position:absolute;top:14px;right:14px;width:44px;height:44px;border-radius:50%;border:0;background:rgba(255,255,255,.92);color:#111;font-size:26px;line-height:1;cursor:pointer;display:flex;align-items:center;justify-content:center}
+#lb img{max-width:100%;max-height:calc(100% - 80px);object-fit:contain;border-radius:8px;box-shadow:0 10px 40px rgba(0,0,0,.6)}
+#lbx{flex:none;min-width:200px;min-height:52px;padding:0 28px;border:0;border-radius:12px;background:#e5484d;color:#fff;font:700 18px/1 inherit;font-family:inherit;cursor:pointer;display:flex;align-items:center;justify-content:center;gap:8px;box-shadow:0 4px 14px rgba(0,0,0,.4)}
+#lbx:active{background:#c93a3f}
 </style></head><body>
 <header class="hero"><div class="wrap grid">
 <div><span class="tag">案例分享｜文化部文化資產局委託</span>
@@ -177,7 +178,7 @@ footer{padding:36px 0 48px;color:var(--mute);font-size:13px;text-align:center}
 
 </main>
 <footer>大玩創意有限公司 Big Fun Idea Co., Ltd｜service@bigfunidea.com.tw｜03-3262912</footer>
-<div id="lb" role="dialog" aria-modal="true" aria-label="放大瀏覽圖片"><button id="lbx" type="button" aria-label="關閉">×</button><img id="lbi" alt=""></div>
+<div id="lb" role="dialog" aria-modal="true" aria-label="放大瀏覽圖片"><img id="lbi" alt=""><button id="lbx" type="button" aria-label="關閉圖片">✕ 關閉圖片</button></div>
 <script>
 (function(){try{var t=document.getElementById('trk'),n=t.children.length,d=document.getElementById('cd'),i=0,h=false,k;
 for(k=0;k<n;k++){d.appendChild(document.createElement('i'))}
@@ -190,7 +191,7 @@ var lb=document.getElementById('lb'),li=document.getElementById('lbi'),op=false;
 function openLb(im){li.src=im.src;li.alt=im.alt||'';lb.className='on';op=true;document.body.style.overflow='hidden'}
 function closeLb(){lb.className='';op=false;li.removeAttribute('src');document.body.style.overflow='';h=false}
 var ims=document.getElementsByTagName('img');for(k=0;k<ims.length;k++){if(ims[k]!==li){ims[k].style.cursor='zoom-in';ims[k].addEventListener('click',function(){openLb(this)})}}
-document.getElementById('lbx').onclick=closeLb;lb.addEventListener('click',function(e){if(e.target!==li)closeLb()});
+document.getElementById('lbx').onclick=closeLb;lb.addEventListener('click',function(e){if(e.target===lb)closeLb()});
 document.addEventListener('keydown',function(e){if(e.key==='Escape'&&op)closeLb()});
 setInterval(function(){if(!h&&!op)go(i+1)},1500)}catch(e){}})();
 </script></body></html>
