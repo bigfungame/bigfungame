@@ -180,5 +180,5 @@ function go(j){i=(j+n)%n;t.scrollTo({left:i*t.clientWidth,behavior:'smooth'})}
 t.addEventListener('scroll',mark);mark();
 document.getElementById('cp').onclick=function(){go(i-1)};document.getElementById('cn').onclick=function(){go(i+1)};
 var c=document.getElementById('car');c.onmouseenter=function(){h=true};c.onmouseleave=function(){h=false};c.addEventListener('touchstart',function(){h=true},{passive:true});
-setInterval(function(){if(!h)go(i+1)},4500)}catch(e){}})();
+setInterval(function(){if(!h)go(i+1)},1500)}catch(e){}})();
 </script></body></html>
